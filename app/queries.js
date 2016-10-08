@@ -208,6 +208,17 @@ export function broadcastMessage(msg, callback) {
     });
 }
 
+export function getCustomReport(name, startDate, endDate, callback){
+    var query = getCustomReportScript(name, startDate, endDate);
+    $.postJSON(query, function (response) {
+        if (response.errors) {
+            // handle errors
+        } else {
+            if (callback) callback(response.data.report);
+        }    
+    });
+}
+
 function getMenuScript() {
     return `{menu:getMenu(name:"${config.menuName}"){categories{id,name,color,foreground,menuItems{id,name,color,foreground,productId,defaultOrderTags}}}}`;
 }
@@ -352,4 +363,8 @@ mutation m{ticket:addOrderToTicket(
 function getPostBroadcastMessageScript(msg) {
     msg = msg.replace(/"/g,'\\"');
     return 'mutation m {postBroadcastMessage(message:"'+msg+'"){message}}';
+}
+
+function getCustomReportScript(name, startDate, endDate) {
+    return `{report:getCustomReport(name:"${name}", startDate:"${startDate}", endDate:"${endDate}"){name, header, startDate, endDate, tables{name, columns{header}, rows{cells}}}}`;
 }
