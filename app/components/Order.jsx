@@ -73,7 +73,6 @@ export default class Order extends React.Component {
                             onClick={this.onOrderTagSelected}/>
                     </div>
                 </Dialog>
-                <Divider/>
             </div>
         );
     }
