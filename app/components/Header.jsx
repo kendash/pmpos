@@ -1,48 +1,70 @@
-import React from 'react';
-import Drawer from 'material-ui/Drawer';
+import React, {Component, PropTypes} from 'react';
 import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
-import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
-import FontIcon from 'material-ui/FontIcon';
-import Event from 'material-ui/svg-icons/action/event';
-import DesktopWindows from 'material-ui/svg-icons/hardware/desktop-windows';
-import LibraryBooks from 'material-ui/svg-icons/av/library-books';
-import AccountBalance from 'material-ui/svg-icons/action/account-balance';
-import StoreMallDirectory from 'material-ui/svg-icons/maps/store-mall-directory';
-import Public from 'material-ui/svg-icons/social/public';
-import ChromeReaderMode from 'material-ui/svg-icons/action/chrome-reader-mode';
-import Settings from 'material-ui/svg-icons/action/settings';
-
-
-const styles = {
-  title: {
-    cursor: 'default'
-  }
-};
+import AppNavDrawer from './AppNavDrawer';
 
 export default class Header extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {open: false};
-  }
+  static propTypes = {
+    children: PropTypes.node,
+    location: PropTypes.object,
+    width: PropTypes.number.isRequired
+  };
 
-  handleToggle = () => this.setState({open: !this.state.open});
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
 
-  handleClose = () => this.setState({open: false});
+  state = {
+    navDrawerOpen: false
+  };
+
+  handleTouchTapLeftIconButton = () => {
+    this.setState({
+      navDrawerOpen: !this.state.navDrawerOpen
+    });
+  };
+
+  handleChangeMuiTheme = (muiTheme) => {
+    this.setState({
+      muiTheme: muiTheme
+    });
+  };
+
+  handleTouchTapLeftIconButton = () => {
+    this.setState({
+      navDrawerOpen: !this.state.navDrawerOpen
+    });
+  };
+
+  handleChangeRequestNavDrawer = (open) => {
+    this.setState({
+      navDrawerOpen: open
+    });
+  };
+
+  handleChangeList = (event, value) => {
+    this.context.router.push(value);
+    this.setState({
+      navDrawerOpen: false
+    });
+  };
 
   render() {
+
+    let docked = true;
+    let {navDrawerOpen} = this.state;    
+
+    const router = this.context.router;
     const {ticket} = this.state;
+
     return (
       <AppBar
         className = "header"
-        title={<span style={styles.title}>{this.props.header}</span>}
-        onLeftIconButtonTouchTap={this.handleToggle}
-        //showMenuIconButton={false}
+        onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
         iconElementRight={
           <IconMenu
             iconButtonElement={
@@ -51,37 +73,17 @@ export default class Header extends React.Component {
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
             anchorOrigin={{horizontal: 'right', vertical: 'top'}}
          >
-           <MenuItem primaryText="Kitchen Screen" />
-           <MenuItem primaryText="Management Screen" />
-           <MenuItem primaryText="Reports" />
+           <MenuItem primaryText="Logout" />
         </IconMenu>
         }
-        >
-    
-        <Drawer
-          docked={false}
-          width={250}
-          open={this.state.open}
-          onRequestChange={(open) => this.setState({open})}
-        >
-        
-        <AppBar
-          className = "header"
-          title="Main Menu"
-          showMenuIconButton={false}
-
-        />
-          <MenuItem leftIcon={<Event />} onTouchTap={this.handleClose}>Work Periods </MenuItem>
-          <MenuItem leftIcon={<DesktopWindows />} onTouchTap={this.handleClose}>POS</MenuItem>
-          <MenuItem leftIcon={<LibraryBooks />} onTouchTap={this.handleClose}>Tickets</MenuItem>
-          <MenuItem leftIcon={<AccountBalance />} onTouchTap={this.handleClose}>Accounts</MenuItem>
-          <MenuItem leftIcon={<StoreMallDirectory />} onTouchTap={this.handleClose}>Warehouses</MenuItem>
-          <MenuItem leftIcon={<Public />} onTouchTap={this.handleClose}>Samba Market</MenuItem>
-          <MenuItem leftIcon={<ChromeReaderMode />} onTouchTap={this.handleClose}>Reports</MenuItem>
-          <MenuItem leftIcon={<Settings />} onTouchTap={this.handleClose}>Manage</MenuItem>
-
-        </Drawer>
-        
+      >
+      <AppNavDrawer
+        docked={docked}
+        open={navDrawerOpen}
+        onChangeList={this.handleChangeList}
+        onRequestChangeNavDrawer={this.handleChangeRequestNavDrawer}
+        onRequestChange={(open) => this.setState({open})}
+      />
       </AppBar>
     );
   }
