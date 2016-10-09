@@ -12,14 +12,14 @@ import ChromeReaderMode from 'material-ui/svg-icons/action/chrome-reader-mode';
 import Settings from 'material-ui/svg-icons/action/settings';
 import {spacing, typography, zIndex} from 'material-ui/styles';
 import {cyan500} from 'material-ui/styles/colors';
+import Subheader from 'material-ui/Subheader';
+import {List, ListItem, makeSelectable} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
 
 const styles = {
-  MenuItem: {
-    fontSize: 15
-  },
     logo: {
     cursor: 'pointer',
-    fontSize: 24,
+    fontSize: 20,
     color: typography.textFullWhite,
     lineHeight: `${spacing.desktopKeylineIncrement}px`,
     fontWeight: typography.fontWeightLight,
@@ -62,17 +62,49 @@ export default class AppNavDrawer extends React.Component {
                 open={open}
             >
                 <div style={styles.logo} onTouchTap={this.handleTouchTapHeader}>
-                Main Menu
+                PM-POS
                 </div>
-
-                <MenuItem leftIcon={<Event />} onTouchTap={this.handleClose}><span style ={styles.MenuItem}>Work Periods</span></MenuItem>
-                <MenuItem leftIcon={<DesktopWindows />} onTouchTap={this.handleClose}><span style ={styles.MenuItem}>POS</span></MenuItem>
-                <MenuItem leftIcon={<LibraryBooks />} onTouchTap={this.handleClose}><span style ={styles.MenuItem}>Tickets</span></MenuItem>
-                <MenuItem leftIcon={<AccountBalance />} onTouchTap={this.handleClose}><span style ={styles.MenuItem}>Accounts</span></MenuItem>
-                <MenuItem leftIcon={<StoreMallDirectory />} onTouchTap={this.handleClose}><span style ={styles.MenuItem}>Warehouses</span></MenuItem>
-                <MenuItem leftIcon={<Public />} onTouchTap={this.handleClose}><span style ={styles.MenuItem}>Samba Market</span></MenuItem>
-                <MenuItem leftIcon={<ChromeReaderMode />} onTouchTap={this.handleClose}><span style ={styles.MenuItem}>Reports</span></MenuItem>
-                <MenuItem leftIcon={<Settings />} onTouchTap={this.handleClose}><span style ={styles.MenuItem}>Manage</span></MenuItem>
+                <ListItem
+                  style={{fontSize: '15'}}
+                  leftIcon={<Event />}
+                  primaryText="Work Periods"
+                />
+                <ListItem
+                  style={{fontSize: '15'}}
+                  leftIcon={<DesktopWindows />}
+                  primaryText="POS"
+                />
+                <Divider/>
+                <Subheader>Manage Restaurant</Subheader>
+                <Divider/>
+                <ListItem
+                  style={{fontSize: '15'}}
+                  leftIcon={<ChromeReaderMode />}
+                  primaryText="Reports"
+                  primaryTogglesNestedList={true}
+                  nestedItems={[
+                    <ListItem style={{ fontSize: '13px' }} insetChildren={true} primaryText="Work Period Report" value="/get-started/required-knowledge" />,
+                    <ListItem style={{ fontSize: '13px' }} insetChildren={true} primaryText="Sales Per Hour" value="/get-started/installation" />,
+                    <ListItem style={{ fontSize: '13px' }} insetChildren={true} primaryText="Inventory Consumption" value="/get-started/usage" />,
+                    <ListItem style={{ fontSize: '13px' }} insetChildren={true} primaryText="Wages Report" value="/get-started/server-rendering" />,
+                    <ListItem style={{ fontSize: '13px' }} insetChildren={true} primaryText="Expenses" value="/get-started/examples" />
+                  ]}
+                />
+                <ListItem
+                  style={{fontSize: '15'}}
+                  leftIcon={<LibraryBooks />}
+                  primaryText="Tickets"
+                />
+                <ListItem
+                  style={{fontSize: '15'}}
+                  leftIcon={<StoreMallDirectory />}
+                  primaryText="Warehouses"
+                />
+                <ListItem
+                  style={{fontSize: '15'}}
+                  leftIcon={<AccountBalance />}
+                  primaryText="Accounts"
+                />
 
             </Drawer>
          );
