@@ -1,5 +1,4 @@
 import React from 'react';
-import {getCustomReport} from '../queries';
 import Header from '../Header';
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
   from 'material-ui/Table';
@@ -29,15 +28,8 @@ const styles = {
   }
 };
 
-const tableData = [
-  {
-    name: '{name}',
-    status: 'Employed',
-    selected: true
-  }
-];
 
-export default class CustomReports extends React.Component {
+export default class Reports extends React.Component {
 
   constructor(props) {
     super(props);
@@ -91,6 +83,16 @@ export default class CustomReports extends React.Component {
   };
 
   render() {
+
+
+ 
+const tableData =[
+  {   
+    name: 'John',
+    status: 'Employed',
+    selected: true
+    }
+];
     return (
       <div>
       <Header header = "Reports"/>
@@ -183,6 +185,6 @@ export default class CustomReports extends React.Component {
     }
 
 }
-CustomReports.contextTypes = {
+Reports.contextTypes = {
     router: React.PropTypes.object
 };
