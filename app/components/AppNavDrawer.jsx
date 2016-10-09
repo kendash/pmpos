@@ -16,6 +16,7 @@ import Subheader from 'material-ui/Subheader';
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 
+
 const styles = {
     logo: {
     cursor: 'pointer',
@@ -48,11 +49,19 @@ export default class AppNavDrawer extends React.Component {
     this.props.onRequestChangeNavDrawer(false);
   };
 
+  handleTouchTapPOS = () => {
+    this.context.router.push('/');
+    this.props.onRequestChangeNavDrawer(false);
+  };
+
+  handleTouchTapReports = () => {
+    this.context.router.push('/reports');
+    this.props.onRequestChangeNavDrawer(false);
+  };
   handleClose = () => this.setState({open: false});
-    
+
      render() {
         const {location,docked,onRequestChangeNavDrawer,onChangeList,open,style} = this.props;
-
          return (
             <Drawer
                 style={style}
@@ -73,6 +82,7 @@ export default class AppNavDrawer extends React.Component {
                   style={{fontSize: '15'}}
                   leftIcon={<DesktopWindows />}
                   primaryText="POS"
+                  onTouchTap={this.handleTouchTapPOS}
                 />
                 <Divider/>
                 <Subheader>Manage Restaurant</Subheader>
@@ -83,7 +93,7 @@ export default class AppNavDrawer extends React.Component {
                   primaryText="Reports"
                   primaryTogglesNestedList={true}
                   nestedItems={[
-                    <ListItem style={{ fontSize: '13px' }} insetChildren={true} primaryText="Work Period Report" value="/get-started/required-knowledge" />,
+                    <ListItem onTouchTap={this.handleTouchTapReports} style={{ fontSize: '13px' }} insetChildren={true} primaryText="Work Period Report" value="/get-started/required-knowledge" />,
                     <ListItem style={{ fontSize: '13px' }} insetChildren={true} primaryText="Sales Per Hour" value="/get-started/installation" />,
                     <ListItem style={{ fontSize: '13px' }} insetChildren={true} primaryText="Inventory Consumption" value="/get-started/usage" />,
                     <ListItem style={{ fontSize: '13px' }} insetChildren={true} primaryText="Wages Report" value="/get-started/server-rendering" />,
@@ -105,7 +115,6 @@ export default class AppNavDrawer extends React.Component {
                   leftIcon={<AccountBalance />}
                   primaryText="Accounts"
                 />
-
             </Drawer>
          );
      }

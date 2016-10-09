@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import EntityList from './components/Entities/EntityList';
-import CustomReports from './components/Reports/CustomReports';
+import Reports from './components/Reports/CustomReports';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -32,7 +32,7 @@ const AppHandler = () => (
       <Router history={hashHistory }>
         <Route path="/" component={App}></Route>
         <Route path="/entities" component={EntityList}></Route>
-        <Route path="/Reports" component={CustomReports}></Route>
+        <Route path="/Reports" component={Reports}></Route>
       </Router>
     </Provider>
   </MuiThemeProvider>
