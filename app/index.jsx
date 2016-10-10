@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Login from './components/Login/Login';
 import App from './components/App';
 import EntityList from './components/Entities/EntityList';
 import Reports from './components/Reports/Reports';
@@ -33,6 +34,7 @@ const AppHandler = () => (
         <Route path="/" component={App}></Route>
         <Route path="/entities" component={EntityList}></Route>
         <Route path="/Reports" component={Reports}></Route>
+        <Route path="/Login" component={Login}></Route>
       </Router>
     </Provider>
   </MuiThemeProvider>

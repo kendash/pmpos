@@ -58,6 +58,12 @@ export default class AppNavDrawer extends React.Component {
     this.context.router.push('/reports');
     this.props.onRequestChangeNavDrawer(false);
   };
+
+  handleTouchTapLogin = () => {
+    this.context.router.push('/login');
+    this.props.onRequestChangeNavDrawer(false);
+  };
+
   handleClose = () => this.setState({open: false});
 
      render() {
@@ -77,6 +83,7 @@ export default class AppNavDrawer extends React.Component {
                   style={{fontSize: '15'}}
                   leftIcon={<Event />}
                   primaryText="Work Periods"
+                  onTouchTap={this.handleTouchTapLogin}
                 />
                 <ListItem
                   style={{fontSize: '15'}}
