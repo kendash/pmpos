@@ -77,6 +77,11 @@ const style = {
 
 export default class Login extends React.Component {
 
+    handleClickPOS = () => {
+        this.context.router.push('/');
+        this.props.onRequestChangeNavDrawer(false);
+    };
+
     componentWillMount(){
         document.body.style.backgroundColor = grey400;
     }
@@ -114,6 +119,7 @@ export default class Login extends React.Component {
                                 label="Submit" 
                                 backgroundColor={blue500}
                                 labelColor="#fff"
+                                onClick={this.handleClickPOS}
                             />
                             </div>
                         </div>
