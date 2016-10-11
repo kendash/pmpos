@@ -66,6 +66,7 @@ export default class Header extends React.Component {
       <AppBar
         style={{backgroundColor: blue500}}
         className = "header"
+        title={this.props.header}
         onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
         iconElementRight={
           <IconMenu

@@ -20,10 +20,10 @@ import Divider from 'material-ui/Divider';
 const styles = {
     logo: {
     cursor: 'pointer',
-    fontSize: 20,
+    fontSize: 24,
     color: typography.textFullWhite,
     lineHeight: `${spacing.desktopKeylineIncrement}px`,
-    fontWeight: typography.fontWeightLight,
+    fontWeight: typography.fontWeightStrong,
     backgroundColor: blue500,
     paddingLeft: spacing.desktopGutter,
     marginBottom: 8
