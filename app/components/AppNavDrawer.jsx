@@ -11,7 +11,7 @@ import Public from 'material-ui/svg-icons/social/public';
 import ChromeReaderMode from 'material-ui/svg-icons/action/chrome-reader-mode';
 import Settings from 'material-ui/svg-icons/action/settings';
 import {spacing, typography, zIndex} from 'material-ui/styles';
-import {cyan500} from 'material-ui/styles/colors';
+import {cyan500, blue500} from 'material-ui/styles/colors';
 import Subheader from 'material-ui/Subheader';
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -24,7 +24,7 @@ const styles = {
     color: typography.textFullWhite,
     lineHeight: `${spacing.desktopKeylineIncrement}px`,
     fontWeight: typography.fontWeightLight,
-    backgroundColor: cyan500,
+    backgroundColor: blue500,
     paddingLeft: spacing.desktopGutter,
     marginBottom: 8
   }

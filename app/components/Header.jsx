@@ -5,6 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import AppNavDrawer from './AppNavDrawer';
+import {blue500} from 'material-ui/styles/colors';
 
 export default class Header extends React.Component {
 
@@ -63,6 +64,7 @@ export default class Header extends React.Component {
 
     return (
       <AppBar
+        style={{backgroundColor: blue500}}
         className = "header"
         onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
         iconElementRight={
