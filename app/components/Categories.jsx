@@ -1,5 +1,6 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import {red500} from 'material-ui/styles/colors';
 
 export default class Categories extends React.Component {
     render() {
@@ -12,7 +13,7 @@ export default class Categories extends React.Component {
                         label = {selectedCategory === name ? <b>-{name}-</b> : name}
                         labelColor = {foreground}
                         key={id}
-                        backgroundColor={color}
+                        backgroundColor={selectedCategory === name ? red500 : color}
                         onClick={onClick.bind(null, name) }/>
                 ) }
             </div>
