@@ -77,6 +77,8 @@ class App extends Component {
                         onMenuItemClick={this.onMenuItemClick}/>
                     <Orders ticket={ticket}
                         orderTagColors={orderTagColors}
+                        onQuantityIncreaseSubmit={this.changeQuantity}
+                        onQuantityDecreaseSubmit={this.changeQuantity}
                         onChangePortion={this.changePortion}
                         getOrderTags={this.getOrderTags}
                         onCancelOrder={this.cancelOrder}
@@ -170,6 +172,13 @@ class App extends Component {
         if (this.props.isMessageOpen)
             this.props.closeMessage();
     };
+
+    changeQuantity = (orderUid, quantity, callback) => {
+        Queries.updateOrderQuantityOfTerminalTicket(this.props.terminalId, orderUid, quantity, (ticket) => {
+            this.props.setTicket(ticket);
+            if (callback) callback();
+        });
+    }
 }
 
 App.contextTypes = {

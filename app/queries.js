@@ -153,6 +153,17 @@ export function updateOrderPortionOfTerminalTicket(terminalId, orderUid, portion
     });
 }
 
+export function updateOrderQuantityOfTerminalTicket(terminalId, orderUid, quantity, callback) {
+    var query = getUpdateOrderQuantityOfTerminalTicketScript(terminalId, orderUid, quantity);
+    $.postJSON(query, function (response) {
+        if (response.errors) {
+            // handle errors
+        } else {
+            if (callback) callback(response.data.ticket);
+        }
+    });   
+}
+
 export function updateOrderTagOfTerminalTicket(terminalId, orderUid, name, tag, callback) {
     var query = getUpdateOrderTagOfTerminalTicketScript(terminalId, orderUid, name, tag);
     $.postJSON(query, function (response) {
@@ -163,6 +174,8 @@ export function updateOrderTagOfTerminalTicket(terminalId, orderUid, name, tag, 
         }
     });
 }
+
+
 
 export function getOrderTagsForTerminal(terminalId, orderUid, callback) {
     var query = getGetOrderTagsForTerminalScript(terminalId, orderUid);
@@ -278,6 +291,13 @@ function getUpdateOrderTagOfTerminalTicketScript(terminalId, orderUid, name, tag
 	    orderTags:[{tagName:"${name}",tag:"${tag}"}])
     ${getTicketResult()}}`;
 }
+
+function getUpdateOrderQuantityOfTerminalTicketScript(terminalId, orderUid, quantity) {
+    return `mutation m {ticket:updateOrderQuantityOfTerminalTicket(
+        terminalId:"${terminalId}",orderUid:"${orderUid}",portion:"${quantity}")
+    ${getTicketResult()}}`;
+}
+
 
 function getCancelOrderOnTerminalTicketScript(terminalId, orderUid) {
     return `mutation m{ticket:cancelOrderOnTerminalTicket(terminalId:"${terminalId}",orderUid:"${orderUid}")

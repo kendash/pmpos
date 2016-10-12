@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, ListItem} from 'material-ui/List';
+import {List, ListItem, makeSelectable} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Portions from './Portions';
 import OrderTags from './OrderTags';
@@ -8,15 +8,20 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import {getProductPortions, getOrderTagsForTerminal} from '../queries';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import Add from 'material-ui/svg-icons/content/add';
+import Remove from 'material-ui/svg-icons/content/remove';
 
 const customContentStyle = {
     'width': '95%'
 };
 
 export default class Order extends React.Component {
+
+
     constructor(props) {
         super(props);
         this.state = {
+            quantity: 1,
             isDetailsOpen: false,
             selectedPortion: '',
             portions: [{ name: 'loading...' }],
@@ -24,8 +29,31 @@ export default class Order extends React.Component {
         };
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
+
+    onQuantityDecrease = () => {
+        this.setState({
+        quantity: this.state.quantity - 1
+        });
+        () => {
+            this.onQuantityDecreaseSubmit()
+        };
+    };
+
+    onQuantityIncrease = () => {
+        this.setState({
+            quantity: this.state.quantity + 1
+        });
+        () => {
+            this.onQuantityIncreaseSubmit()
+        };
+    };
+
+
     render() {
+
+
         const {id, name, quantity, price, priceTag, portion, productId, orderUid, orderTags, orderTagColors, onClick = () => { }, onCancelOrder = () => { } } = this.props;
+
         const detailActions = [
             <FlatButton
                 label="Remove Order"
@@ -42,7 +70,21 @@ export default class Order extends React.Component {
         const orderLine =
             <div>
                 <div className="order">
-                    <span className="orderQuantity">{quantity}</span>
+                    <span className="orderQuantity"> {quantity}</span>
+                    <span className="orderName">{orderName}</span>
+                    <span className="orderPrice">
+                        <span className="orderPriceTag">{priceTag}</span>
+                        <span >{price}</span>
+                    </span>
+                </div>
+                <SelectedOrderTags orderTags={orderTags}
+                    orderTagColors={orderTagColors}/>
+            </div>;
+
+        const orderLine2 =
+            <div>
+                <div className="order">
+                    <span className="orderQuantity2"><Remove onTouchTap={this.onQuantityDecrease} style={{width: '15',height: '15'}}/> {this.state.quantity} <Add onTouchTap={this.onQuantityIncrease} style={{width: '15',height: '15'}}/></span>
                     <span className="orderName">{orderName}</span>
                     <span className="orderPrice">
                         <span className="orderPriceTag">{priceTag}</span>
@@ -59,7 +101,7 @@ export default class Order extends React.Component {
                     {orderLine}
                 </ListItem>
                 <Dialog
-                    title={orderLine}
+                    title={orderLine2}
                     actions={detailActions}
                     modal={true}
                     contentStyle={customContentStyle}
@@ -76,6 +118,21 @@ export default class Order extends React.Component {
             </div>
         );
     }
+
+    onQuantityIncreaseSubmit = (quantity) => {
+        this.props.onQuantityChanged(this.props.orderUid, this.state.quantity,
+            () => {
+                this.setState({quantity: quantity + 1});
+                });
+        }
+
+    onQuantityDecreaseSubmit = (quantity) => {
+        this.props.onQuantityChanged(this.props.orderUid, this.state.quantity,
+            () => {
+                this.setState({quantity: quantity - 1});
+                });
+        }      
+    
 
     onPortionSelected = (name) => {
         this.props.onChangePortion(this.props.orderUid, name,
@@ -115,4 +172,4 @@ export default class Order extends React.Component {
     handleDetailsClose = () => {
         this.setState({ isDetailsOpen: false });
     };
-} 
+}
