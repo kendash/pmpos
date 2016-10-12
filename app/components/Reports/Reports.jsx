@@ -16,6 +16,7 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui
 import Snackbar from 'material-ui/Snackbar';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
+import {blue500} from 'material-ui/styles/colors';
 
 const styles = {
   propContainer: {
@@ -158,7 +159,7 @@ const tableData =[
           </ToolbarGroup>
           <ToolbarGroup>
             <FontIcon className="muidocs-icon-custom-sort" />
-            <RaisedButton onTouchTap={this.handleTouchTap} label="Print Report" primary={true} />
+            <RaisedButton onTouchTap={this.handleTouchTap} label="Print Report" backgroundColor={blue500} labelColor="#fff" />
             <Snackbar
               open={this.state.open}
               message="Report printed successfully!"
