@@ -84,7 +84,7 @@ export default class Order extends React.Component {
         const orderLine2 =
             <div>
                 <div className="order">
-                    <span className="orderQuantity2"><Remove onTouchTap={this.onQuantityDecrease} style={{width: '15',height: '15'}}/> {this.state.quantity} <Add onTouchTap={this.onQuantityIncrease} style={{width: '15',height: '15'}}/></span>
+                    <span className="orderQuantity2"><Remove onTouchTap={this.onQuantityDecrease} style={{width: '15',height: '15'}}/> {quantity} <Add onTouchTap={this.onQuantityIncrease} style={{width: '15',height: '15'}}/></span>
                     <span className="orderName">{orderName}</span>
                     <span className="orderPrice">
                         <span className="orderPriceTag">{priceTag}</span>
