@@ -39,7 +39,7 @@ export function appconfig() {
     var userName = 'Admin';
     var departmentName = 'Restaurant';
     var ticketTypeName = 'Ticket';
-    var menuName = 'Menu';
+    var menuName = 'Main Menu';
     var entityScreenName = 'All Tables';
 
     // assign some stuff to the Object
